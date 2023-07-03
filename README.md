@@ -31,3 +31,39 @@ Following an operation like the previous one, but now given the total amount $`\
 ```
 This expression (\ref{eq:resources}) computes the total amount available of USDT after m trades. The parameters that can be controlled in the model are the fraction $`f_i`$ of the invest resources $`\beta_*`$ in each trade and although it's not obvious, the time $`\delta t`$ between buy and sell actions. On the other hand, the percentage change $`\phi_i`$ will be considered as a random variable, which in principle can be biased by the way in which positions are placed.
 
+## Growth metric
+As a metric to evaluate growth, the natural logarithm (a strictly increasing function) of the ratio $`{\beta_m}/{\beta_0}`$ between the final and initial amounts of the portfolio multiplied by a normalization constant $`{m}^{-1}`$ is given by
+```math
+G = \frac{1}{m} ln \left ( \frac{\beta_m}{\beta_0} \right )
+```
+Replacing the expression of the cumulative returns in the last equation we get that the metric ends up being the expected value of the fraction of resources available during each trade:
+```math
+G = \frac{1}{m} \sum_{i=1}^{m} ln \left ( 1 + f_i \phi_i \right )
+```
+```math
+G = E\left [ ln \left ( 1 + f_i \phi_i \right ) \right ]
+```
+
+## Maximize growth
+To maximize the growth metric we will consider a fixed fraction $f$ on each trade as a first approximation to the problem. We will calculate the value of with respect the moments of the probability distribution of the $`\phi_i`$ random variable. First we are going to expand as a Taylor series ($`ln \left ( 1 + x \right ) \approx x - \frac{1}{2} x^{2} + \cdots `$) up to second order:
+```math
+G = f E \left [ \phi_i \right ] - \frac{f^{2}}{2} E\left [ \phi_{i}^{2} \right ] + \cdots
+```
+The optimal value for $`f`$ that maximizes $G$ must satisfies $`{dG}/{df}=0`$, Deriving and equating to zero, we obtain:
+```math
+E \left [ \phi_i \right ] - f E\left [ \phi_{i}^{2} \right ] + \cdots \approx 0
+```
+solving for f in the previous expression, we can identify that the optimal value of the fraction is the ratio between the first moment and the second moment of the distribution of the return percentage:
+```math
+f \approx \frac{E \left [ \phi_i \right ]}{E\left [ \phi_{i}^{2} \right ]}
+```
+Replacing the value of $`f`$ we compute the value of the growth metric for the optimal value:
+```math
+G = \frac{E \left [ \phi_i \right ]}{E\left [ \phi_{i}^{2} \right ]} E\left [ \phi_i \right ] - \frac{1}{2} {\left( \frac{E \left [ \phi_i \right ]}{E\left [ \phi_{i}^{2} \right ]} \right)}^{2} E\left [ \phi_{i}^{2} \right ] + \cdot \cdot \cdot
+```
+```math
+G = \frac{{E \left [ \phi_i \right ]}^{2}}{E\left [ \phi_{i}^{2} \right ]} - \frac{1}{2} \frac{{E \left [ \phi_i \right ]}^{2}}{E\left [ \phi_{i}^{2} \right ]} + \cdot \cdot \cdot
+```
+```math
+G \approx \frac{1}{2} {\left( \frac{E \left [ \phi_i \right ]}{ \sqrt{E\left [ \phi_{i}^{2} \right ]}}\right)}^{2}
+```
