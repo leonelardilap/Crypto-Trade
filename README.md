@@ -46,29 +46,18 @@ G = E\left [ ln \left ( 1 + f_i \phi_i \right ) \right ]
 
 ## Maximize growth
 To maximize the growth metric we will consider a fixed fraction $f$ on each trade as a first approximation to the problem. We will calculate the value of with respect the moments of the probability distribution of the $`\phi_i`$ random variable. First we are going to expand as a Taylor series:
-
 ```math
 \ln(1+x) = \sum_{n=1}^{\infty} (-1)^{n+1} \frac{x^n}{n}, \quad for \quad |x| < 1.
 ```
-
 ```math
-G = E \left [ \sum_{n=1}^{\infty} (-1)^{n+1} \frac{\left ( f \phi \right )^n}{n}\right ], \quad for \quad |f \phi| < 1.
+G = E \left [ \sum_{n=1}^{\infty} (-1)^{n+1} \frac{\left ( f \phi \right )^n}{n}\right ], \quad \frac{dG}{df} = \sum_{n=0}^{\infty} (-f)^{n} {E \left [ \phi^{n+1} \right ]}.
 ```
-The optimal value for $`f`$ that maximizes $G$ must satisfies $`{dG}/{df}=0`$, Deriving and equating to zero, we obtain:
+
+The optimal value for $`f`$ that maximizes $G$ must satisfies $`{dG}/{df}=0`$, considering up to second order and deriving and equating to zero, we obtain:
 ```math
 E \left [ \phi_i \right ] - f E\left [ \phi_{i}^{2} \right ] + \cdots \approx 0
 ```
 solving for f in the previous expression, we can identify that the optimal value of the fraction is the ratio between the first moment and the second moment of the distribution of the return percentage:
 ```math
 f \approx \frac{E \left [ \phi_i \right ]}{E\left [ \phi_{i}^{2} \right ]}
-```
-Replacing the value of $`f`$ we compute the value of the growth metric for the optimal value:
-```math
-G = \frac{E \left [ \phi_i \right ]}{E\left [ \phi_{i}^{2} \right ]} E\left [ \phi_i \right ] - \frac{1}{2} {\left( \frac{E \left [ \phi_i \right ]}{E\left [ \phi_{i}^{2} \right ]} \right)}^{2} E\left [ \phi_{i}^{2} \right ] + \cdot \cdot \cdot
-```
-```math
-G = \frac{{E \left [ \phi_i \right ]}^{2}}{E\left [ \phi_{i}^{2} \right ]} - \frac{1}{2} \frac{{E \left [ \phi_i \right ]}^{2}}{E\left [ \phi_{i}^{2} \right ]} + \cdot \cdot \cdot
-```
-```math
-G \approx \frac{1}{2} {\left( \frac{E \left [ \phi_i \right ]}{ \sqrt{E\left [ \phi_{i}^{2} \right ]}}\right)}^{2}
 ```
