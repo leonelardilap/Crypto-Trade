@@ -45,9 +45,14 @@ G = E\left [ ln \left ( 1 + f_i \phi_i \right ) \right ]
 ```
 
 ## Maximize growth
-To maximize the growth metric we will consider a fixed fraction $f$ on each trade as a first approximation to the problem. We will calculate the value of with respect the moments of the probability distribution of the $`\phi_i`$ random variable. First we are going to expand as a Taylor series ($`ln \left ( 1 + x \right ) \approx x - \frac{1}{2} x^{2} + \cdots `$) up to second order:
+To maximize the growth metric we will consider a fixed fraction $f$ on each trade as a first approximation to the problem. We will calculate the value of with respect the moments of the probability distribution of the $`\phi_i`$ random variable. First we are going to expand as a Taylor series:
+
 ```math
-G = f E \left [ \phi_i \right ] - \frac{f^{2}}{2} E\left [ \phi_{i}^{2} \right ] + \cdots
+\ln(1+x) = \sum_{n=1}^{\infty} (-1)^{n+1} \frac{x^n}{n}, \quad for \quad |x| < 1.
+```
+
+```math
+G = E \left [ \sum_{n=1}^{\infty} (-1)^{n+1} \frac{\left ( f \phi \right )^n}{n}\right ], \quad for \quad |f \phi| < 1.
 ```
 The optimal value for $`f`$ that maximizes $G$ must satisfies $`{dG}/{df}=0`$, Deriving and equating to zero, we obtain:
 ```math
